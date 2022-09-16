@@ -1,0 +1,145 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\everymath{\displaystyle}
+
+\begin{document}
+\section{问题1的分析和求解}
+由于无人级基于自身感知，均保持在同一个高度飞行，所以研究的是平面上的定位问题。目标编队要求将 \(9\) 架无人机均匀安排在围绕编号为FY00的无人机的某一圆周上，不妨记无人机 FY00 为\(O\), 设圆形编队半径为 \(R\)。
+
+\subsection{问题1-(1)}
+\paragraph{模型建立} 
+
+不妨记分布在圆周上的发射信号的两架无人机分别为 \(A\) ， \(B\)（ \(\overset{\frown}{AB}\) 为较短弧，\(A\)在\(B\)的顺时针方向）；以无人机\(O\)为极点，\(OA\)方向为极轴建立极坐标系，则目标编队\(9\)架无人机等距（间隔\(\Theta=\frac{2\pi}{9}\)）分布在半径为\(R\)的圆周上，如图 \[\text{极坐标图示例}\]
+
+记被动接收信号、待确定位置的飞行器为\(C_i\)，其目标位置为\(\tilde{C_i}\)。以\(A\)为第\(1\)架无人机，逆时针计数，可设\(B\)为第\(k\)架，\(k=2,\cdots,9\)，\(C_i\)为第\(i\)架，\(i\neq k,i = 2,3,\cdots,9\)，于是有各飞行器位置的极坐标
+\(A(R,0)\)，
+\(B(R,\theta_k)\)，
+\(C_i(r_i,\theta_i)\)，
+\(\tilde{C_i}(R,\tilde{\theta_i})\)，
+
+由于被动接收信号的无人机只是位置略有偏差，也就是第\(i\)架无人机的实际位置\(C_i\)应当是在其真实位置\(\tilde{C_i}\)周边的某个小范围内（如\(C_2\)），而不会存在本该处于圆周上的三架无人机在一条直线上或者偏差更大的情况（比如图中\(C^{'}_2\)和\(C^{"}_2\)）\[\text{插图,C2的示例}\]于是，可以补充
+
+假设：接收信号的无人机位置与目标位置的偏差足够小，其偏差距离 \[\gamma <<\Gamma= R(1-\cos\Theta)\]
+% TODO
+由\(\Gamma = R\sin\delta_{max}\),可以保证\(\delta\)足够小，
+\[\text{一个解释公式的图，标注了相关内容}\]
+于是对于
+\(C_i(r_i,\theta_i)\)，
+\(\tilde{C_i}(R,\tilde{\theta_i})\)，
+\begin{align}
+    r_i = R + \gamma_i, -\gamma <\gamma_i < \gamma \label{r_i} \\
+    \theta_i = \tilde{\theta_i} + \delta_i, - \delta < \delta_i < \delta
+\end{align}
+不失一般性的，对于待求位置\(C(r,\theta)\)，连接\(BC\)、\(AC\)、\(OC\)
+
+在\(\Delta AOC\)中始终有
+\begin{align}
+    \frac{OC}{\sin{\angle OAC}} = \frac{OA}{\angle ACO}
+\end{align}
+
+在\(\Delta BOC\) 中始终有
+\begin{align}
+    \frac{OC}{\sin{\angle OBC}} = \frac{OB}{\sin\angle BCO}
+\end{align}
+
+其中，
+\(OA=OB=R\) ，
+\(\angle AOB = k\Theta\) ，
+也即 \(\Delta AOB\) 是已知的；
+\(\angle ACO\) 、
+\(\angle BCO\) 以及
+\(\angle ACB\) 是接收到的信号，是自变量；
+\(OC=r\) ，
+\(\angle OAC\) 和 \(\angle OBC\)
+可由 \(\theta\) 和三角形内角关系确定，记：
+\begin{align}
+    f(\theta)\overset{def}{=}\angle OAC \\
+    g(\theta)\overset{def}{=}\angle OBC
+\end{align}
+而且 \(f,g\) 是线性的，有
+\begin{align*}
+    f(\theta) = f(\tilde{\theta}+\delta)=f(\tilde{\theta})+\delta \\
+    g(\theta) = g(\tilde{\theta}+\delta) = g(\tilde{\theta})+\delta
+\end{align*}
+其中，\(\tilde{\theta}\)是\(C\)的理想位置的极角，于是，对于空间中任意的C有
+\begin{align}
+    \frac{r}{\sin(f(\tilde{\theta})+\delta)} = \frac{R}{\sin\angle ACO} \label{eqf1} \\
+    \frac{r}{\sin(g(\tilde{\theta})+\delta)} = \frac{OB}{\sin\angle BCO} \label{eqg1}
+\end{align}
+其中
+\begin{align}
+    \sin(f(\tilde{\theta})+\delta)=\sin f(\tilde{\theta}) \cos\delta+\cos f(\tilde{\theta})\sin\delta \label{eqf2} \\
+    \sin(g(\tilde{\theta})+\delta)=\sin g(\tilde{\theta}) \cos\delta+\cos g(\tilde{\theta})\sin\delta \label{eqg2}
+\end{align}
+
+又有\(\delta\rightarrow 0 \)时
+\begin{align*}
+    \cos\delta & \sim 1-\frac{1}{2}\delta^2 \\
+    sin\delta  & \sim \delta
+\end{align*}
+
+在本题中，由于\(\delta\)较小，于是可以对(\ref{eqf2})和(\ref{eqg2})做一个近似替换，再带入到(\ref{eqf1})和(\ref{eqg1}) 中联立，得到一个关于\(\delta\)的一元二次方程，记作\(H(\delta)= 0 \)。只需要\(H(\delta)=0\)有解，即可求出\(C(r,\theta)\)。
+
+\paragraph{问题求解}下面就直线$ OA,OB $将此平面分割为4个部分讨论其解。
+
+给定\(B\)，对于指定的\(C_i\)，有
+\begin{align}
+    \frac{r_i}{\sin{\angle OAC_i}} = \frac{R}{\sin\angle AC_iO} \\
+    \frac{r_i}{\sin{\angle OBC_i}} = \frac{OB}{\sin\angle BC_iO}
+\end{align}
+
+（1） $ \tilde{C_i}\in\overset{\frown}{AB} $时
+
+插图
+
+\begin{align*}
+    \angle OAC_i & =\pi - (\angle AC_iO + \theta_i)                  \\
+                 & =\pi - (\angle AC_iO + \tilde{\theta_i}+\delta_i)
+\end{align*}
+\begin{align*}
+    \angle OBC_i & =\pi - (\angle BC_iO + \angle AOB - \theta_i)                \\
+                 & = \pi - (\angle BC_iO + k\Theta - \tilde{\theta_i}-\delta_i)
+\end{align*}
+
+（2） $ \tilde{C_i}\in\overset{\frown}{BA'} $时
+
+插图
+
+\begin{align*}
+    \angle OAC_i & =\pi - (\angle AC_iO + \theta_i)                  \\
+                 & =\pi - (\angle AC_iO + \tilde{\theta_i}+\delta_i)
+\end{align*}
+\begin{align*}
+    \angle OBC_i & =\pi - (\angle BC_iO + \theta_i - \angle AOB )                \\
+                 & = \pi - (\angle BC_iO + \tilde{\theta_i}+\delta_i - k\Theta )
+\end{align*}
+（3） $ \tilde{C_i}\in\overset{\frown}{A'B'} $时
+
+插图
+
+\begin{align*}
+    \angle OAC_i & =\pi - (\angle AC_iO + (2\pi -\theta_i))           \\
+                 & =-\pi - (\angle AC_iO - \tilde{\theta_i}-\delta_i)
+\end{align*}
+\begin{align*}
+    \angle OBC_i & =\pi - (\angle BC_iO + \theta_i - \angle AOB )                \\
+                 & = \pi - (\angle BC_iO + \tilde{\theta_i}+\delta_i - k\Theta )
+\end{align*}
+
+（4） $ \tilde{C_i}\in\overset{\frown}{B'A} $时
+
+插图
+
+\begin{align*}
+    \angle OAC_i & =\pi - (\angle AC_iO + (2\pi-\theta_i ))           \\
+                 & =-\pi - (\angle AC_iO - \tilde{\theta_i}-\delta_i)
+\end{align*}
+\begin{align*}
+    \angle OBC_i & =\pi - (\angle BC_iO + \angle AOB +2\pi - \theta_i)           \\
+                 & = -\pi - (\angle BC_iO + k\Theta - \tilde{\theta_i}-\delta_i)
+\end{align*}
+
+\end{document}
