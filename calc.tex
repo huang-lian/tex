@@ -1,0 +1,57 @@
+\documentclass{ctexart}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\everymath{\displaystyle}
+
+\begin{document}
+给定\(B\)，对于指定的\(C_i\)，有
+\begin{align}
+    \frac{r_i}{\sin{\angle OAC_i}} = \frac{R}{\sin\angle AC_iO}\label{eqCi1} \\
+    \frac{r_i}{\sin{\angle OBC_i}} = \frac{R}{\sin\angle BC_iO}\label{eqCi2}
+\end{align}
+
+（1） $ \tilde{C_i}\in\overset{\frown}{AB} $时
+
+插图
+
+\begin{align*}
+    \sin \angle OAC_i & =\sin(\pi - (\angle AC_iO + \theta_i)            )      \\
+                 & =\sin(\angle AC_iO + \tilde{\theta_i}+\delta_i)\\
+                 & =\sin(\angle AC_iO + i\Theta +\delta_i)\\
+                 &=\sin(\angle AC_iO + i\Theta)\cos\delta_i + \cos(\angle AC_iO + i\Theta)\sin(\delta_i)\\
+                 &\approx \sin(\angle AC_iO + i\Theta)(1-\frac{1}{2}x^2) + \cos(\angle AC_iO + i\Theta)x
+\end{align*}
+
+\begin{align*}
+    \sin\angle OBC_i & =\sin(\pi - (\angle BC_iO + \angle AOB - \theta_i))\\
+                 & = \sin (\angle BC_iO + k\Theta - (\tilde{\theta_i}+\delta_i))\\
+                 & = \sin (\angle BC_iO + k\Theta - i\Theta - \delta_i))\\
+                 & =  \sin (\angle BC_iO + (k - i)\Theta)\cos \delta_i-\cos  (\angle BC_iO + \Theta(k - i))\sin  \delta_i\\
+                 & \approx \sin (\angle BC_iO + (k - i)\Theta)(1-\frac{1}{2}x^2)-\cos  (\angle BC_iO + (k - i)\Theta)x
+\end{align*}
+
+记
+\begin{align*}
+    \sin(\angle AC_iO + i\Theta) &=\sin(\angle AC_iO + i\Theta)\\
+    b_1 &= \cos(\angle AC_iO + i\Theta)\\
+    c_1 &= \sin\angle AC_iO\\
+    a_2 &= \sin (\angle BC_iO + (k - i)\Theta)\\
+    b_2 &= \cos  (\angle BC_iO + (k - i)\Theta)\\
+    c_2 &= \sin\angle BC_iO\\
+\end{align*}
+
+\begin{align*}
+0&=(a_1c_2 - a_2c_1)x^2-2(b_1c_2+b_2c_1)x -2(a_1c_2 - a_2c_1)\\
+a &= (a_1c_2 - a_2c_1)\\
+&= \sin(\angle AC_iO + i\Theta)\sin\angle BC_iO - \sin (\angle BC_iO + (k - i)\Theta)\sin\angle AC_iO\\
+b &= 2(b_1c_2+b_2c_1) \\
+& = 2(\cos(\angle AC_iO + i\Theta)\sin\angle BC_iO+\cos  (\angle BC_iO + (k - i)\Theta)\sin\angle AC_iO) \\
+c &= -2(a_1c_2 - a_2c_1)\\
+ &= -2a
+\end{align*}
+
+于是方程 (\ref{eqCi1}) 和 (\ref{eqCi2}) 联立，代换后可以得到
+
+
+\end{document}
